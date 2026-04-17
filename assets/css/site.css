@@ -67,12 +67,31 @@ body {
   background: transparent;
   font: inherit;
   line-height: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .site-nav a[aria-current="page"],
 .nav-dropdown-toggle[aria-current="page"] {
   background: #ccfbf1;
   border-color: #99f6e4;
+}
+
+.nav-dropdown-toggle:focus {
+  outline: none;
+}
+
+.nav-dropdown-toggle:focus-visible {
+  outline: 2px solid #14b8a6;
+  outline-offset: 1px;
+}
+
+.nav-caret {
+  font-size: 0.85em;
+  transform: translateY(-1px);
 }
 
 .nav-dropdown {
@@ -97,6 +116,7 @@ body {
   display: block;
   border-radius: 8px;
   padding: 0.45rem 0.6rem;
+  white-space: nowrap;
 }
 
 .nav-dropdown-menu a:hover {

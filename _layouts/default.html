@@ -14,13 +14,20 @@
         <nav class="site-nav" aria-label="Main navigation">
           <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Dashboard</a>
           <div class="nav-dropdown">
-            <button type="button" class="nav-dropdown-toggle" {% if page.url == '/category/' %}aria-current="page"{% endif %} aria-expanded="false" aria-controls="header-category-menu">
-              Category
+            <button
+              type="button"
+              class="nav-dropdown-toggle"
+              {% if page.url == '/category/' %}aria-current="page"{% endif %}
+              aria-expanded="false"
+              aria-controls="header-category-menu"
+            >
+              <span>Category</span>
+              <span class="nav-caret" aria-hidden="true">⌄</span>
             </button>
             <div class="nav-dropdown-menu" id="header-category-menu" role="menu" hidden>
               <a role="menuitem" href="{{ '/category/?type=all' | relative_url }}">All Categories</a>
-              <a role="menuitem" href="{{ '/category/?type=apartment' | relative_url }}">Apartment</a>
               <a role="menuitem" href="{{ '/category/?type=terrace' | relative_url }}">Terrace</a>
+              <a role="menuitem" href="{{ '/category/?type=apartment' | relative_url }}">Apartment</a>
               <a role="menuitem" href="{{ '/category/?type=semi-d' | relative_url }}">Semi D</a>
               <a role="menuitem" href="{{ '/category/?type=flat' | relative_url }}">Flat</a>
               <a role="menuitem" href="{{ '/category/?type=bungalo' | relative_url }}">Bungalo</a>
@@ -56,6 +63,12 @@
           const isOpen = toggle.getAttribute("aria-expanded") === "true";
           toggle.setAttribute("aria-expanded", String(!isOpen));
           menu.hidden = isOpen;
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            closeMenu();
+          }
         });
 
         document.addEventListener("click", function (event) {
