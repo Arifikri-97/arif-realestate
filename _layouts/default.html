@@ -24,7 +24,7 @@
               <span>Category</span>
               <span class="nav-caret" aria-hidden="true">&#9662;</span>
             </button>
-            <div class="nav-dropdown-menu" id="header-category-menu" role="menu" hidden>
+            <div class="nav-dropdown-menu" id="header-category-menu" role="menu">
               <a role="menuitem" href="{{ '/category/?type=all' | relative_url }}">All Categories</a>
               <a role="menuitem" href="{{ '/category/?type=terrace' | relative_url }}">Terrace</a>
               <a role="menuitem" href="{{ '/category/?type=apartment' | relative_url }}">Apartment</a>
@@ -47,36 +47,5 @@
         <p>{{ site.description }}</p>
       </div>
     </footer>
-    <script>
-      (function () {
-        const dropdown = document.querySelector(".nav-dropdown");
-        if (!dropdown) return;
-        const toggle = dropdown.querySelector(".nav-dropdown-toggle");
-        const menu = dropdown.querySelector(".nav-dropdown-menu");
-
-        function closeMenu() {
-          toggle.setAttribute("aria-expanded", "false");
-          menu.hidden = true;
-        }
-
-        toggle.addEventListener("click", function () {
-          const isOpen = toggle.getAttribute("aria-expanded") === "true";
-          toggle.setAttribute("aria-expanded", String(!isOpen));
-          menu.hidden = isOpen;
-        });
-
-        document.addEventListener("keydown", function (event) {
-          if (event.key === "Escape") {
-            closeMenu();
-          }
-        });
-
-        document.addEventListener("click", function (event) {
-          if (!dropdown.contains(event.target)) {
-            closeMenu();
-          }
-        });
-      })();
-    </script>
   </body>
 </html>
