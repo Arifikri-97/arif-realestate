@@ -108,8 +108,12 @@ body {
   border-radius: 10px;
   box-shadow: 0 10px 22px rgba(17, 24, 39, 0.12);
   padding: 0.3rem;
-  display: none;
+  display: block;
   z-index: 80;
+}
+
+.nav-dropdown-menu[hidden] {
+  display: none;
 }
 
 .nav-dropdown-menu a {
