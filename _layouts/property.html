@@ -2,46 +2,51 @@
 layout: default
 ---
 
-<article class="property-post">
-  <header class="property-header">
+{% assign status = page.status | default: "available" | downcase %}
+{% assign category_slug = page.category | default: "uncategorized" | downcase | replace: " ", "-" | replace: "bungalow", "bungalo" %}
+
+<article class="property-detail">
+  <header class="property-head">
+    <span class="status-badge status-{{ status }}">{{ status | capitalize }}</span>
     <h1>{{ page.title }}</h1>
-    <h2 class="property-price">{{ page.price }}</h2>
-    <p class="property-location">{{ page.location }}</p>
+    <p class="price">{{ page.price | default: "Contact for price" }}</p>
+    <p class="meta">{{ page.location }}</p>
   </header>
 
-  <div class="property-content">
+  <section class="property-content">
     {% if page.image %}
-    <div class="property-image">
-      <img src="{{ page.image }}" alt="{{ page.title }}" style="width:100%;height:auto;">
-    </div>
+      <div class="property-photo">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+      </div>
     {% endif %}
 
-    <div class="property-details">
-      <div class="property-meta">
-        <span class="bedrooms">{{ page.bedrooms }} BR</span>
-        <span class="bathrooms">{{ page.bathrooms }} BA</span>
-        <span class="location">{{ page.location }}</span>
-      </div>
-
-      <div class="property-description">
-        {{ content }}
-      </div>
-
-      <div class="property-features">
-        <h3>Features:</h3>
-        <ul>
-          {% for feature in page.features %}
-          <li>{{ feature }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div class="property-contact">
-        <h3>Contact for Viewing</h3>
-        <a href="tel:{{ page.contact_phone }}" class="btn btn-primary">
-          Call Now: {{ page.contact_phone }}
-        </a>
-      </div>
+    <div class="property-meta">
+      {% if page.category %}<span>Category: {{ category_slug | replace: "-", " " | capitalize }}</span>{% endif %}
+      {% if page.bedrooms %}<span>{{ page.bedrooms }} Bedroom</span>{% endif %}
+      {% if page.bathrooms %}<span>{{ page.bathrooms }} Bathroom</span>{% endif %}
+      {% if page.address %}<span>{{ page.address }}</span>{% endif %}
     </div>
-  </div>
+
+    <div class="property-description">
+      {{ content }}
+    </div>
+
+    {% if page.features %}
+      <h3>Features</h3>
+      <ul>
+        {% for feature in page.features %}
+          <li>{{ feature }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class="card-actions">
+      {% if status == "available" %}
+        <a class="btn btn-primary" href="{{ site.whatsapp_link }}" target="_blank" rel="noopener">WhatsApp for Inquiry</a>
+      {% else %}
+        <span class="empty-message">Listing ini sudah {{ status }}. WhatsApp inquiry ditutup untuk mengelakkan pertanyaan pada unit tidak available.</span>
+      {% endif %}
+      <a class="btn btn-outline" href="{{ '/' | relative_url }}">Back to Dashboard</a>
+    </div>
+  </section>
 </article>

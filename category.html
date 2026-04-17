@@ -1,33 +1,38 @@
 ---
 layout: default
-title: Dashboard
+title: Category
+permalink: /category/
 ---
 
-{% assign initial_filter = "all" %}
-{% unless site.show_closed_listings %}
-  {% assign initial_filter = "available" %}
-{% endunless %}
-
 <section class="hero">
-  <h1>Dashboard</h1>
-  <p>Semua listing hartanah anda, dengan pilihan tapis ikut status.</p>
+  <h1>Category</h1>
+  <p>Tapis ikut jenis rumah dan status listing.</p>
 </section>
 
+<div class="filter-row" aria-label="Category filters">
+  <button class="filter-btn active" data-category-filter="all">All Categories</button>
+  <button class="filter-btn" data-category-filter="apartment">Apartment</button>
+  <button class="filter-btn" data-category-filter="terrace">Terrace</button>
+  <button class="filter-btn" data-category-filter="semi-d">Semi D</button>
+  <button class="filter-btn" data-category-filter="flat">Flat</button>
+  <button class="filter-btn" data-category-filter="bungalo">Bungalo</button>
+</div>
+
 <div class="filter-row" aria-label="Status filters">
-  <button class="filter-btn {% if initial_filter == 'available' %}active{% endif %}" data-status-filter="available">Available</button>
+  <button class="filter-btn active" data-status-filter="available">Available</button>
   <button class="filter-btn" data-status-filter="closed">Closed</button>
-  <button class="filter-btn {% if initial_filter == 'all' %}active{% endif %}" data-status-filter="all">All</button>
+  <button class="filter-btn" data-status-filter="all">All</button>
 </div>
 
 <section class="listing-grid" id="listing-grid">
   {% for property in site.properties %}
     {% assign status = property.status | default: "available" | downcase %}
-    {% assign category_slug = property.category | default: "uncategorized" | downcase | replace: " ", "-" | replace: "bungalow", "bungalo" %}
     {% assign status_group = "closed" %}
     {% if status == "available" %}
       {% assign status_group = "available" %}
     {% endif %}
-    <article class="card listing-card" data-status="{{ status_group }}">
+    {% assign category_slug = property.category | default: "uncategorized" | downcase | replace: " ", "-" | replace: "bungalow", "bungalo" %}
+    <article class="card listing-card" data-status="{{ status_group }}" data-category="{{ category_slug }}">
       <div class="card-img">
         {% if property.image %}
           <img src="{{ property.image | relative_url }}" alt="{{ property.title }}">
@@ -50,29 +55,42 @@ title: Dashboard
   {% endfor %}
 </section>
 
-<p class="empty-message" id="empty-message" hidden>Tiada listing untuk filter ini.</p>
+<p class="empty-message" id="empty-message" hidden>Tiada listing untuk kombinasi filter ini.</p>
 
 <script>
   (function () {
     const cards = Array.from(document.querySelectorAll(".listing-card"));
-    const buttons = Array.from(document.querySelectorAll("[data-status-filter]"));
+    const categoryButtons = Array.from(document.querySelectorAll("[data-category-filter]"));
+    const statusButtons = Array.from(document.querySelectorAll("[data-status-filter]"));
     const emptyState = document.getElementById("empty-message");
-    let activeStatus = "{{ initial_filter }}";
+
+    let activeCategory = "all";
+    let activeStatus = "available";
 
     function applyFilters() {
       let visible = 0;
       cards.forEach((card) => {
+        const categoryMatch = activeCategory === "all" || card.dataset.category === activeCategory;
         const statusMatch = activeStatus === "all" || card.dataset.status === activeStatus;
-        card.style.display = statusMatch ? "" : "none";
-        if (statusMatch) visible += 1;
+        const show = categoryMatch && statusMatch;
+        card.style.display = show ? "" : "none";
+        if (show) visible += 1;
       });
       emptyState.hidden = visible !== 0;
     }
 
-    buttons.forEach((button) => {
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeCategory = button.dataset.categoryFilter;
+        categoryButtons.forEach((btn) => btn.classList.toggle("active", btn === button));
+        applyFilters();
+      });
+    });
+
+    statusButtons.forEach((button) => {
       button.addEventListener("click", () => {
         activeStatus = button.dataset.statusFilter;
-        buttons.forEach((btn) => btn.classList.toggle("active", btn === button));
+        statusButtons.forEach((btn) => btn.classList.toggle("active", btn === button));
         applyFilters();
       });
     });

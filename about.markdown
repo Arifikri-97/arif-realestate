@@ -1,18 +1,24 @@
 ---
-layout: page
+layout: default
 title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+## Hi, saya Arif
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+Saya agent hartanah berdaftar dan fokus membantu pembeli serta pelabur cari rumah yang sesuai ikut bajet dan lokasi.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+### Kawasan tumpuan
+- Selangor
+- Kuala Lumpur
+- Putrajaya/Cyberjaya
 
+### Servis saya
+- Konsultasi pembelian rumah pertama
+- Semakan kelayakan asas pembiayaan
+- Cadangan unit ikut keperluan keluarga/pelaburan
+- Uruskan viewing dan follow-up sehingga closing
 
-[jekyll-organization]: https://github.com/jekyll
+### Hubungi saya
+- Email: [{{ site.email }}](mailto:{{ site.email }})
+- WhatsApp: [Direct chat]({{ site.whatsapp_link }})

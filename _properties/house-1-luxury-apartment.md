@@ -1,25 +1,24 @@
 ---
 layout: property
-title: "3BHK Luxury Apartment - Downtown Miami"
-price: "$850,000"
+title: "Apartment Servis 3 Bilik - Cyberjaya"
+price: "RM 520,000"
+category: apartment
+status: available
 bedrooms: 3
 bathrooms: 2
-location: "Downtown Miami, FL"
-address: "123 Ocean Drive, Miami, FL 33139"
+location: "Cyberjaya, Selangor"
+address: "Cyberjaya, Selangor"
 features:
-  - "Ocean View"
-  - "24/7 Security"
-  - "Swimming Pool"
-  - "Gym Facility"
-  - "Parking Included"
-image: "/assets/house1.jpg"
-contact_phone: "(305) 555-0199"
+  - "Gated & Guarded"
+  - "2 Covered Parking"
+  - "Nearby MRT/ERL Access"
+  - "Swimming Pool & Gym"
+image: ""
 ---
 
-This spacious 3-bedroom luxury apartment offers stunning ocean views and premium amenities. Located in the heart of downtown Miami, this property combines urban convenience with resort-style living.
+Unit apartment servis yang luas dan sesuai untuk keluarga kecil atau pelaburan sewa. Lokasi strategik berhampiran kemudahan harian, akses lebuh raya, serta pusat komersial.
 
-**Key Features:**
-- Spacious living areas with floor-to-ceiling windows
-- Modern kitchen with granite countertops
-- Master suite with walk-in closet
-- Building features concierge service
+**Maklumat ringkas**
+- Freehold
+- Kejiranan matang
+- Sesuai untuk own stay / investment
