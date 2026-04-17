@@ -6,16 +6,19 @@ permalink: /category/
 
 <section class="hero">
   <h1>Category</h1>
-  <p>Tapis ikut jenis rumah dan status listing.</p>
+  <p>Pilih kategori rumah dan tapis ikut status listing.</p>
 </section>
 
-<div class="filter-row" aria-label="Category filters">
-  <button class="filter-btn active" data-category-filter="all">All Categories</button>
-  <button class="filter-btn" data-category-filter="apartment">Apartment</button>
-  <button class="filter-btn" data-category-filter="terrace">Terrace</button>
-  <button class="filter-btn" data-category-filter="semi-d">Semi D</button>
-  <button class="filter-btn" data-category-filter="flat">Flat</button>
-  <button class="filter-btn" data-category-filter="bungalo">Bungalo</button>
+<div class="sub-header">
+  <label for="category-filter">Pilih Kategori</label>
+  <select id="category-filter" class="category-select" aria-label="Category filter">
+    <option value="all">All Categories</option>
+    <option value="apartment">Apartment</option>
+    <option value="terrace">Terrace</option>
+    <option value="semi-d">Semi D</option>
+    <option value="flat">Flat</option>
+    <option value="bungalo">Bungalo</option>
+  </select>
 </div>
 
 <div class="filter-row" aria-label="Status filters">
@@ -60,7 +63,7 @@ permalink: /category/
 <script>
   (function () {
     const cards = Array.from(document.querySelectorAll(".listing-card"));
-    const categoryButtons = Array.from(document.querySelectorAll("[data-category-filter]"));
+    const categorySelect = document.getElementById("category-filter");
     const statusButtons = Array.from(document.querySelectorAll("[data-status-filter]"));
     const emptyState = document.getElementById("empty-message");
 
@@ -79,12 +82,9 @@ permalink: /category/
       emptyState.hidden = visible !== 0;
     }
 
-    categoryButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        activeCategory = button.dataset.categoryFilter;
-        categoryButtons.forEach((btn) => btn.classList.toggle("active", btn === button));
-        applyFilters();
-      });
+    categorySelect.addEventListener("change", () => {
+      activeCategory = categorySelect.value;
+      applyFilters();
     });
 
     statusButtons.forEach((button) => {

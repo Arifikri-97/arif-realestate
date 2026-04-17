@@ -89,6 +89,31 @@ body {
   gap: 0.45rem;
 }
 
+.sub-header {
+  margin: 1.2rem 0 0.9rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.sub-header label {
+  font-weight: 600;
+}
+
+.category-select {
+  min-width: 220px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.42rem 0.6rem;
+  background: #fff;
+  color: var(--text);
+}
+
 .filter-btn {
   border: 1px solid var(--line);
   background: var(--surface);
@@ -276,6 +301,59 @@ body {
   padding: 1rem 0;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.portfolio {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.3rem;
+}
+
+.profile-photo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.9rem;
+}
+
+.profile-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #d1fae5;
+  background: #e5e7eb;
+}
+
+.portfolio h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.portfolio-lead {
+  text-align: center;
+  color: var(--muted);
+  margin: 0.7rem auto 1rem;
+  max-width: 760px;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.portfolio-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem;
+  background: #fafafa;
+}
+
+.portfolio-card h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.05rem;
 }
 
 @media (max-width: 720px) {
