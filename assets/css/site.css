@@ -57,18 +57,20 @@ body {
 }
 
 .site-nav a,
-.site-nav summary {
+.nav-dropdown-toggle {
   text-decoration: none;
   color: var(--text);
   padding: 0.4rem 0.75rem;
   border-radius: 999px;
   border: 1px solid transparent;
-  list-style: none;
   cursor: pointer;
+  background: transparent;
+  font: inherit;
+  line-height: inherit;
 }
 
 .site-nav a[aria-current="page"],
-.site-nav summary[aria-current="page"] {
+.nav-dropdown-toggle[aria-current="page"] {
   background: #ccfbf1;
   border-color: #99f6e4;
 }
@@ -77,13 +79,9 @@ body {
   position: relative;
 }
 
-.nav-dropdown summary::-webkit-details-marker {
-  display: none;
-}
-
 .nav-dropdown-menu {
   position: absolute;
-  right: 0;
+  left: 0;
   top: calc(100% + 0.25rem);
   min-width: 180px;
   background: #fff;
@@ -95,13 +93,10 @@ body {
   z-index: 80;
 }
 
-.nav-dropdown[open] .nav-dropdown-menu {
-  display: block;
-}
-
 .nav-dropdown-menu a {
   display: block;
   border-radius: 8px;
+  padding: 0.45rem 0.6rem;
 }
 
 .nav-dropdown-menu a:hover {
