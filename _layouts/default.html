@@ -13,7 +13,17 @@
         <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
         <nav class="site-nav" aria-label="Main navigation">
           <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Dashboard</a>
-          <a href="{{ '/category/' | relative_url }}" {% if page.url == '/category/' %}aria-current="page"{% endif %}>Category</a>
+          <details class="nav-dropdown">
+            <summary {% if page.url == '/category/' %}aria-current="page"{% endif %}>Category</summary>
+            <div class="nav-dropdown-menu">
+              <a href="{{ '/category/?type=all' | relative_url }}">All Categories</a>
+              <a href="{{ '/category/?type=apartment' | relative_url }}">Apartment</a>
+              <a href="{{ '/category/?type=terrace' | relative_url }}">Terrace</a>
+              <a href="{{ '/category/?type=semi-d' | relative_url }}">Semi D</a>
+              <a href="{{ '/category/?type=flat' | relative_url }}">Flat</a>
+              <a href="{{ '/category/?type=bungalo' | relative_url }}">Bungalo</a>
+            </div>
+          </details>
           <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}aria-current="page"{% endif %}>About</a>
         </nav>
       </div>

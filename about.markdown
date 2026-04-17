@@ -5,8 +5,8 @@ permalink: /about/
 ---
 
 <section class="portfolio">
-  <div class="profile-photo-wrap">
-    <img src="{{ '/assets/images/profile-arif.jpg' | relative_url }}" alt="Profile photo Arif" class="profile-photo">
+  <div class="profile-photo-wrap" aria-label="Profile photo frame">
+    <img src="{{ '/assets/images/profile-arif.jpg' | relative_url }}" alt="Profile photo Arif" class="profile-photo" width="160" height="160">
   </div>
 
   <h1>Hi, saya Arif</h1>

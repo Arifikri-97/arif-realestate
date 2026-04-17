@@ -5,21 +5,9 @@ permalink: /category/
 ---
 
 <section class="hero">
-  <h1>Category</h1>
+  <h1 id="category-title">All Categories</h1>
   <p>Pilih kategori rumah dan tapis ikut status listing.</p>
 </section>
-
-<div class="sub-header">
-  <label for="category-filter">Pilih Kategori</label>
-  <select id="category-filter" class="category-select" aria-label="Category filter">
-    <option value="all">All Categories</option>
-    <option value="apartment">Apartment</option>
-    <option value="terrace">Terrace</option>
-    <option value="semi-d">Semi D</option>
-    <option value="flat">Flat</option>
-    <option value="bungalo">Bungalo</option>
-  </select>
-</div>
 
 <div class="filter-row" aria-label="Status filters">
   <button class="filter-btn active" data-status-filter="available">Available</button>
@@ -31,14 +19,15 @@ permalink: /category/
   {% for property in site.properties %}
     {% assign status = property.status | default: "available" | downcase %}
     {% assign status_group = "closed" %}
+    {% assign image_path = property.image | to_s | strip %}
     {% if status == "available" %}
       {% assign status_group = "available" %}
     {% endif %}
     {% assign category_slug = property.category | default: "uncategorized" | downcase | replace: " ", "-" | replace: "bungalow", "bungalo" %}
     <article class="card listing-card" data-status="{{ status_group }}" data-category="{{ category_slug }}">
       <div class="card-img">
-        {% if property.image %}
-          <img src="{{ property.image | relative_url }}" alt="{{ property.title }}">
+        {% if image_path != "" %}
+          <img src="{{ image_path | relative_url }}" alt="{{ property.title }}">
         {% endif %}
       </div>
       <div class="card-body">
@@ -62,13 +51,28 @@ permalink: /category/
 
 <script>
   (function () {
+    const labelMap = {
+      all: "All Categories",
+      apartment: "Apartment",
+      terrace: "Terrace",
+      "semi-d": "Semi D",
+      flat: "Flat",
+      bungalo: "Bungalo"
+    };
+    const query = new URLSearchParams(window.location.search);
+    const categoryFromQuery = (query.get("type") || "all").toLowerCase();
+    const activeCategoryDefault = Object.prototype.hasOwnProperty.call(labelMap, categoryFromQuery)
+      ? categoryFromQuery
+      : "all";
+
     const cards = Array.from(document.querySelectorAll(".listing-card"));
-    const categorySelect = document.getElementById("category-filter");
     const statusButtons = Array.from(document.querySelectorAll("[data-status-filter]"));
     const emptyState = document.getElementById("empty-message");
+    const categoryTitle = document.getElementById("category-title");
 
-    let activeCategory = "all";
+    let activeCategory = activeCategoryDefault;
     let activeStatus = "available";
+    categoryTitle.textContent = labelMap[activeCategory] || "All Categories";
 
     function applyFilters() {
       let visible = 0;
@@ -81,11 +85,6 @@ permalink: /category/
       });
       emptyState.hidden = visible !== 0;
     }
-
-    categorySelect.addEventListener("change", () => {
-      activeCategory = categorySelect.value;
-      applyFilters();
-    });
 
     statusButtons.forEach((button) => {
       button.addEventListener("click", () => {
